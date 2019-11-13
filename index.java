@@ -71,7 +71,6 @@
   should have a YES and NO button. When the user clicks on YES, a message should be shown
   in a Toast: “You clicked YES”. Otherwise, the message should be shown: “You clicked NO”.
   Write the complete code of confirmation dialog.
-
 */
 
 class MainActivity ... 
@@ -101,8 +100,10 @@ class MainActivity ...
 
 // ================================================================================================================ //
 
-Write the purpose of fragments and write code of passing a string value “Pakistan” from
-MainActivity to a fragment.
+/*
+  QUESTION - Write the purpose of fragments and write code of passing a string value “Pakistan” from
+  MainActivity to a fragment.
+*/
 
 
 
