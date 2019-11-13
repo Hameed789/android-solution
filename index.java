@@ -465,5 +465,128 @@ class MainActivity ...
 */
 
 
+ class RecordSearchActivity ... 
+
+ public void btnClick(View vew) {
+
+        EditText id_edit_text = findViewById(R.id.id_edit_text);
+        String str_id = id_edit_text.getText().toString().trim();
+
+        if (str_id.isEmpty()) {
+            Toast.makeText(this, "Please enter ID value", Toast.LENGTH_SHORT).show();
+        } else {
+            try {
+
+                Integer.parseInt(str_id); // checking if ID is valid or not 
+
+                SQLiteDatabase db = databaseObject.getReadableDatabase();
+                Cursor cursor = db.rawQuery("select * from students where ID = ?", new String[]{ str_id });
+                if (cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+
+                    Intent intent = new Intent(this, ViewRecordActivity.class);
+                    intent.putExtra("ID", cursor.getInt(0));
+                    intent.putExtra("name", cursor.getString(1));
+                    intent.putExtra("age", cursor.getInt(2));
+                    intent.putExtra("address", cursor.getString(3));
+                    startActivity(intent);
+
+                } else {
+                    Toast.makeText(this, "Record not found", Toast.LENGTH_SHORT).show();
+                }
+
+            } catch (Exception e) {
+                Toast.makeText(this, "Please enter proper ID value", Toast.LENGTH_SHORT).show();
+            } // try - catch ends here
+
+        } // if - else ends here
+
+    }// btnClick ends here
+
+
+class ViewRecordActivity ... 
+
+  public void onCreate(Bundle savedInstanceState) {
+      
+      TextView id_text_view = findViewById(R.id.id_text_view);
+      TextView name_text_view = findViewById(R.id.name_text_view);
+      TextView address_text_view = findViewById(R.id.address_text_view);
+      TextView age_text_view = findViewById(R.id.age_text_view);
+
+      id_text_view.setText( String.valueOf( getIntent().getExtras().getInt("ID") ) );
+      name_text_view.setText( getIntent().getExtras().getString("name") );
+      address_text_view.setText( getIntent().getExtras().getString("address") );
+      age_text_view.setText( String.valueOf( getIntent().getExtras().getInt("age") ) );
+
+    }
+
+// ================================================================================================================ //
+/*
+  QUESTION - Write a method that update value in database against ID = 25
+*/
+
+class MainActivity ... 
+  
+  public void btnClick(View vew) {
+
+        EditText id_edit_text = findViewById(R.id.id_edit_text);
+        EditText name_edit_text = findViewById(R.id.name_edit_text);
+        EditText address_edit_text = findViewById(R.id.address_edit_text);
+
+        String str_id = id_edit_text.getText().toString().trim();
+        String str_name = name_edit_text.getText().toString().trim();
+        String str_address = address_edit_text.getText().toString().trim();
+        Integer ID = null;
+
+        if (str_id.isEmpty() || str_name.isEmpty() || str_address.isEmpty()) {
+            Toast.makeText(this, "Please enter all value", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            ID = Integer.parseInt(str_id);
+        } catch (Exception e) {
+            Toast.makeText(this, "Please enter proper ID value", Toast.LENGTH_SHORT).show();
+        }
+
+        SQLiteDatabase db = databaseObj.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        
+        values.put("name", str_name);
+        values.put("address", str_address);
+
+        db.update("students", values, " ID = " + ID, null);
+
+    }// btnClick ends here
+
+
+
+// ================================================================================================================ //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
