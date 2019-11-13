@@ -333,14 +333,83 @@ class MainActivity ...
   QUESTION - Write a method that inserts value in database.
 */
 
+class MainActivity ... 
+  
+   public void btnClick(View vew) {
+
+        EditText id_edit_text = findViewById(R.id.id_edit_text);
+        EditText name_edit_text = findViewById(R.id.name_edit_text);
+        EditText address_edit_text = findViewById(R.id.address_edit_text);
+
+        String str_id = id_edit_text.getText().toString().trim();
+        String str_name = name_edit_text.getText().toString().trim();
+        String str_address = address_edit_text.getText().toString().trim();
+        Integer ID = null;
+
+        if (str_id.isEmpty() || str_name.isEmpty() || str_address.isEmpty()) {
+            Toast.makeText(this, "Please enter all value", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            ID = Integer.parseInt(str_id);
+        } catch (Exception e) {
+            Toast.makeText(this, "Please enter proper ID value", Toast.LENGTH_SHORT).show();
+        }
+
+        SQLiteDatabase db = databaseObj.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("ID", ID);
+        values.put("name", str_name);
+        values.put("address", str_address);
+
+        db.insertOrThrow("students", null, values);
+
+    }// btnClick ends here
 
 
+// ================================================================================================================ //
+/*
+  QUESTION - For the layout given in above form, write code for update operation
+*/
 
+class MainActivity ... 
+  
+  public void btnClick(View vew) {
 
+        EditText id_edit_text = findViewById(R.id.id_edit_text);
+        EditText name_edit_text = findViewById(R.id.name_edit_text);
+        EditText address_edit_text = findViewById(R.id.address_edit_text);
 
+        String str_id = id_edit_text.getText().toString().trim();
+        String str_name = name_edit_text.getText().toString().trim();
+        String str_address = address_edit_text.getText().toString().trim();
+        Integer ID = null;
 
+        if (str_id.isEmpty() || str_name.isEmpty() || str_address.isEmpty()) {
+            Toast.makeText(this, "Please enter all value", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            ID = Integer.parseInt(str_id);
+        } catch (Exception e) {
+            Toast.makeText(this, "Please enter proper ID value", Toast.LENGTH_SHORT).show();
+        }
 
+        SQLiteDatabase db = databaseObj.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        
+        values.put("name", str_name);
+        values.put("address", str_address);
 
+        db.update("students", values, " ID = " + ID, null);
+
+    }// btnClick ends here
+
+// ================================================================================================================ //
+/*
+  QUESTION - Based on the search fields in the above form, create a dynamic select query.
+*/
 
 
 
