@@ -49,7 +49,7 @@
     ArrayList<HashMap<String, String>> list;
     HashMap<String, String> map;
 
-    protected void onCreate() {
+    public void onCreate() {
       
         list = new ArrayList<>();
 
