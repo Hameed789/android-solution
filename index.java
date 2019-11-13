@@ -408,12 +408,61 @@ class MainActivity ...
 
 // ================================================================================================================ //
 /*
-  QUESTION - Based on the search fields in the above form, create a dynamic select query.
+  QUESTION - Suppose we have the search form as shown above. Write code to make a dynamic select
+  query. You just need to create the query and nothing else.
 */
 
+class MainActivity ... 
+  
+  public void btnClick(View vew) {
+
+        String query = "select * from students where ";
+        ArrayList<String> temp = new ArrayList<>();
+
+        EditText id_edit_text = findViewById(R.id.id_edit_text);
+        EditText name_edit_text = findViewById(R.id.name_edit_text);
+        EditText address_edit_text = findViewById(R.id.address_edit_text);
+
+        String str_id = id_edit_text.getText().toString().trim();
+        String str_name = name_edit_text.getText().toString().trim();
+        String str_address = address_edit_text.getText().toString().trim();
 
 
+        if (!str_id.isEmpty()) {
+            // ID is not empty
+            temp.add(" ID = " + str_id);
+        }
 
+        if (!str_name.isEmpty()) {
+            temp.add("name like ' % " + str_name + " % ' ");
+        }
+
+        if (!str_address.isEmpty()) {
+            temp.add("address like ' % " + str_address + " % ' ");
+        }
+
+
+        for (int i = 0; i < temp.size(); i++) {
+
+            if (i == (temp.size() - 1)) {
+                // last record - we do not need and in the last
+                query += temp.get(i);
+                
+            } else {
+
+                query += temp.get(i) + " and ";
+            } // if - else ends here
+
+        }// for loop ends here 
+
+   }// btnClick ends here
+
+// ================================================================================================================ //
+/*
+  QUESTION - Write an application that asks for an ID from user in Record Search Activity. When the user
+  enters the ID, the record is shown against the ID in the Record View Activity. The record is
+  fetched from SQLite Database.
+*/
 
 
 
