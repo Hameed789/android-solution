@@ -304,8 +304,34 @@ class FirstFragment ...
   QUESTION - Write a method that deletes the row from database whose id is 25.
 */
 
+class MainActivity ... 
+  
+  public void btnClick(View vew) {
+
+        EditText editText = findViewById(R.id.editText);
+        String value = editText.getText().toString().trim();
+
+        if (value.isEmpty()) {
+            Toast.makeText(this, "Please enter value", Toast.LENGTH_SHORT).show();
+        } else {
+            try {
+                int ID = Integer.parseInt(value);
+                SQLiteDatabase db = databaseObject.getWritableDatabase();
+                db.delete("student", " id = " + ID, null);
+                db.close();
+            } catch (Exception e) {
+                Toast.makeText(this, "Please enter numeric value only", Toast.LENGTH_SHORT).show();
+            }// try - catch ends here 
+
+        } // else ends here 
+
+   }// btnClick ends here
 
 
+// ================================================================================================================ //
+/*
+  QUESTION - Write a method that inserts value in database.
+*/
 
 
 
