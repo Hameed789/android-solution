@@ -231,7 +231,7 @@ class FirstFragment ...
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
 
-        View view = inflater.inflate(R.layout.fragment_blank, container, false);
+        View view = inflater.inflate(R.layout.first_fragment, container, false);
 
         String value = getArguments().getString("value");
         value += " Zindabad";
@@ -252,8 +252,57 @@ class FirstFragment ...
 */
 
 
+class MainActivity ... 
+  
+   public void btnClick(View vew) {
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        FrameLayout frameLayout = findViewById(R.id.frame);
+        frameLayout.removeAllViews();
+
+        Fragment fragment = new FirstFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("ID", 10);
+        fragment.setArguments(bundle);
+
+        transaction.add(R.id.frame, fragment);
+
+        transaction.commit();
+
+    }// btnClick ends here
 
 
+class FirstFragment ... 
+  
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
+
+        View view = inflater.inflate(R.layout.first_fragment, container, false);
+
+        int ID = getArguments().getInt("ID");
+
+        TextView name = view.findViewById(R.id.name);
+        TextView email = view.findViewById(R.id.email);
+
+        SQLiteDatabase db = databaseObject.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from students where ID = ?", new String[]{String.valueOf(ID)});
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            name.setText(cursor.getString(1));
+            email.setText(cursor.getString(2));
+        } else {
+            Toast.makeText(getContext(), "Record not found", Toast.LENGTH_SHORT).show();
+        }
+
+        return view;
+    }
+
+// ================================================================================================================ //
+/*
+  QUESTION - Write a method that deletes the row from database whose id is 25.
+*/
 
 
 
