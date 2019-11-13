@@ -74,6 +74,40 @@
 
 */
 
+class MainActivity ... 
+  
+  public void btnClick(View view){
+  
+    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+  
+    builder.setMessage("Are you sure you want to perform this operation?");
+  
+    builder.setPositiveButton("YES", ... {
+        public void onClick(...) {
+            Toast.makeText(MainActivity.this, "You clicked YES", Toast.LENGTH_SHORT).show();
+        }
+    });
+  
+    builder.setNegativeButton("NO", ... {
+        public void onClick(...) {
+            Toast.makeText(MainActivity.this, "You clicked NO", Toast.LENGTH_SHORT).show();
+        }
+    });
+
+    AlertDialog dialog = builder.create();
+    dialog.show();
+  
+  }// btnClick ends here 
+
+// ================================================================================================================ //
+
+
+
+
+
+
+
+
 
 
 
