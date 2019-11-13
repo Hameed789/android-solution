@@ -105,10 +105,36 @@ class MainActivity ...
   MainActivity to a fragment.
 */
 
+--- A fragment has its own layout and its own behaviour with its own life cycle callbacks.
+--- You can add or remove fragments in an activity while the activity is running.
+--- You can combine multiple fragments in a single activity to build a multi-pane UI.
+--- A fragment can be used in multiple activities.
+--- A fragment can implement a behaviour that has no user interface component.
 
 
+ class MainActivity ... 
+    
+   public void btnClick(View view) {
 
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
 
+        FrameLayout frameLayout = findViewById(R.id.frame);
+        frameLayout.removeAllViews();
+
+        Fragment fragment = new HomeFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("country", "Pakistan");
+        fragment.setArguments(bundle);
+
+        transaction.add(R.id.frame, fragment);
+
+        transaction.commit();
+
+    }
+
+// ================================================================================================================ //
 
 
 
