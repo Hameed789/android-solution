@@ -101,7 +101,8 @@ class MainActivity ...
 
 // ================================================================================================================ //
 
-
+Write the purpose of fragments and write code of passing a string value “Pakistan” from
+MainActivity to a fragment.
 
 
 
